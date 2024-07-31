@@ -7,7 +7,9 @@ We present how a data analyst, upon receiving summary data from a data provider 
 
 ## Outline of demo code
 I. Load packages / functions / [summary] data
+
 II. Generate pseudo-data
+
 III. Estimate LMM using pseudo-data
 
 Run the following commands in R
