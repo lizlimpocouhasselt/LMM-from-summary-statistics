@@ -119,9 +119,9 @@ saveRDS(var_cov_mat, file = "var_cov_mat_chop.R")
 ## I. Load packages / functions / [summary] data ------
 #install.packages('lme4')
 library(lme4)
-source('pseudo_data_gen.R') #modified mvrnorm
+source('pseudo_data_gen_fn.R') #modified mvrnorm
 source('pseudo_data_ls_fn.R') 
-#other options are source('pseudo_data_gen_mvrnorm_option.R') or source('pseudo_data_gen_chol_option.R')
+#other options are source('pseudo_data_gen_mvrnorm_option_fn.R') or source('pseudo_data_gen_chol_option_fn.R')
 summary_stats <- readRDS("summary_stats_chop.R")
 var_cov_mat <- readRDS("var_cov_mat_chop.R")
 # Preview of summary statistics from 1 data provider
