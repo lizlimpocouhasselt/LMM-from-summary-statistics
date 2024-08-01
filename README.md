@@ -16,7 +16,7 @@ To generate pseudo-data, we utilize the following functions:
 source('pseudo_data_gen_fn.R') #modified mvrnorm
 source('pseudo_data_ls_fn.R') 
 ``` 
-Once pseudo-data are generated, we will use the following package R to estimate an LMM 
+Once pseudo-data are generated, we will use the following package in R to estimate an LMM 
 ```r
 library(lme4)
 ```
@@ -92,4 +92,6 @@ confint(lmm_pseudo)
 confint(lmm_actual)
 
 ```
+
+These output should be exactly the same except for the residuals, which would require the actual observations that are unavailable in practice.
 
