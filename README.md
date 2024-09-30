@@ -23,8 +23,24 @@ library(lme4)
 For this demo, we used the publicly available data from the Children's Hospital of Pennsylvania (CHOP) which can be accessed from the R package [medicaldata](https://cran.r-project.org/web/packages/medicaldata/medicaldata.pdf). It contains deidentified patient information and COVID-19 test results from 88 clinics, although we only utilized 70 clinics for this demo after filtering out incomplete observations, observations with invalid values, and clinics with only 1 patient record. From these, we computed summary statistics such as the mean vector, covariance matrix, and sample size per clinic (see DATA PROVIDER TASK portion of lmm_chop.R). To mimic a real-world scenario in this demo, we assume that the data analyst has received only these summary statistics: 
 ```r
 # Load summary data
-summary_stats <- readRDS("summary_stats_chop.R")
-var_cov_mat <- readRDS("var_cov_mat_chop.R")
+id_summary_stats <- "1dw6y5CN1d1Kuh5PMyZ7Nh6_5kbyrpN4L"
+summary_stats_one <- read.csv(sprintf("https://docs.google.com/uc?id=%s&export=download", id_summary_stats))
+summary_stats <- summary_stats_one %>%        #breaks up data into 1 dataframe per clinic
+  dplyr::select(-1) %>% 
+  split(f = as.factor(.$clinic_name)) %>%
+  lapply(function(df){
+    df[-ncol(df)]
+  })
+
+id_var_cov_mat <- "1dwuaHNbUAtnzV8FtBiH7H_isRqkHjT1w"
+var_cov_mat_one <- read.csv(sprintf("https://docs.google.com/uc?id=%s&export=download", id_var_cov_mat))
+var_cov_mat <- var_cov_mat_one %>%        #breaks up data into 1 dataframe per clinic 
+  dplyr::select(-1) %>%
+  split(f = as.factor(.$clinic_name)) %>%
+  lapply(function(df) {
+      rownames(df) <- colnames(df)[-ncol(df)]
+    return(as.matrix(df[-ncol(df)]))
+  })
 
 # Show preview of summary statistics from 1 data provider
 vars <- c('log_ct_result', 'gendermale', 'age', 'drive_thru_ind_factor1', 'gendermaleXage')
