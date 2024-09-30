@@ -1,0 +1,849 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={lmm\_chop.R},
+  pdfauthor={lucp12431},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{lmm\_chop.R}
+\author{lucp12431}
+\date{2024-09-30}
+
+\begin{document}
+\maketitle
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}
+\CommentTok{\# FEDERATED DATA ANALYSIS FOR LINEAR [MIXED] MODELS}
+\CommentTok{\# USING CHOP DATA}
+\CommentTok{\#{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Clear memory}
+\FunctionTok{rm}\NormalTok{(}\AttributeTok{list=}\FunctionTok{ls}\NormalTok{(}\AttributeTok{all=}\ConstantTok{TRUE}\NormalTok{))}
+
+\CommentTok{\# Set working directory}
+\CommentTok{\#setwd("G:/My Drive/PhD/FDA")}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Install packages}
+\CommentTok{\#install.packages(\textquotesingle{}medicaldata\textquotesingle{})}
+\CommentTok{\#install.packages(\textquotesingle{}skimr\textquotesingle{})}
+\CommentTok{\#install.packages(\textquotesingle{}purrr\textquotesingle{})}
+\CommentTok{\#install.packages(\textquotesingle{}dplyr\textquotesingle{})}
+
+\DocumentationTok{\#\# I. Load packages and data {-}{-}{-}{-}{-}{-}}
+\FunctionTok{library}\NormalTok{(medicaldata)}
+\FunctionTok{library}\NormalTok{(skimr)}
+\FunctionTok{library}\NormalTok{(purrr)}
+\FunctionTok{library}\NormalTok{(dplyr)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Attaching package: 'dplyr'
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:stats':
+## 
+##     filter, lag
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:base':
+## 
+##     intersect, setdiff, setequal, union
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{data}\NormalTok{(}\StringTok{"covid\_testing"}\NormalTok{)}
+\FunctionTok{skim}\NormalTok{(covid\_testing) }\CommentTok{\#overview of variables}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}[]{@{}ll@{}}
+\caption{Data summary}\tabularnewline
+\toprule\noalign{}
+\endfirsthead
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Name & covid\_testing \\
+Number of rows & 15524 \\
+Number of columns & 17 \\
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ & \\
+Column type frequency: & \\
+character & 9 \\
+numeric & 8 \\
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ & \\
+Group variables & None \\
+\end{longtable}
+
+\textbf{Variable type: character}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.2162}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.1351}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.1892}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.0541}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.0541}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.0811}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.1216}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.1486}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+skim\_variable
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+n\_missing
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+complete\_rate
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+min
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+max
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+empty
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+n\_unique
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+whitespace
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+fake\_first\_name & 0 & 1.00 & 3 & 13 & 0 & 832 & 0 \\
+fake\_last\_name & 0 & 1.00 & 4 & 11 & 0 & 27 & 0 \\
+gender & 0 & 1.00 & 4 & 6 & 0 & 2 & 0 \\
+test\_id & 0 & 1.00 & 5 & 5 & 0 & 2 & 0 \\
+clinic\_name & 0 & 1.00 & 3 & 32 & 0 & 88 & 0 \\
+result & 0 & 1.00 & 7 & 8 & 0 & 3 & 0 \\
+demo\_group & 0 & 1.00 & 6 & 12 & 0 & 5 & 0 \\
+payor\_group & 7087 & 0.54 & 5 & 18 & 0 & 7 & 0 \\
+patient\_class & 7077 & 0.54 & 9 & 23 & 0 & 9 & 0 \\
+\end{longtable}
+
+\textbf{Variable type: numeric}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 20\tabcolsep) * \real{0.1515}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 20\tabcolsep) * \real{0.1010}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 20\tabcolsep) * \real{0.1414}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 20\tabcolsep) * \real{0.0808}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 20\tabcolsep) * \real{0.0808}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 20\tabcolsep) * \real{0.0707}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 20\tabcolsep) * \real{0.0808}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 20\tabcolsep) * \real{0.0707}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 20\tabcolsep) * \real{0.0808}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 20\tabcolsep) * \real{0.0808}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 20\tabcolsep) * \real{0.0606}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+skim\_variable
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+n\_missing
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+complete\_rate
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+mean
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+sd
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+p0
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+p25
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+p50
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+p75
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+p100
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+hist
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+subject\_id & 0 & 1.00 & 5570.65 & 3613.70 & 1.00 & 2329.75 & 5268.0 &
+8636.25 & 12346.0 & ▇▆▆▆▅ \\
+pan\_day & 0 & 1.00 & 63.21 & 27.22 & 4.00 & 38.00 & 65.0 & 87.00 &
+107.0 & ▃▇▆▇▇ \\
+age & 0 & 1.00 & 14.19 & 16.47 & 0.00 & 2.00 & 9.0 & 18.00 & 138.0 &
+▇▁▁▁▁ \\
+drive\_thru\_ind & 0 & 1.00 & 0.51 & 0.50 & 0.00 & 0.00 & 1.0 & 1.00 &
+1.0 & ▇▁▁▁▇ \\
+ct\_result & 209 & 0.99 & 44.12 & 3.98 & 14.05 & 45.00 & 45.0 & 45.00 &
+45.0 & ▁▁▁▁▇ \\
+orderset & 0 & 1.00 & 0.70 & 0.46 & 0.00 & 0.00 & 1.0 & 1.00 & 1.0 &
+▃▁▁▁▇ \\
+col\_rec\_tat & 0 & 1.00 & 7.22 & 492.82 & 0.00 & 0.70 & 1.9 & 3.60 &
+61370.2 & ▇▁▁▁▁ \\
+rec\_ver\_tat & 0 & 1.00 & 5.64 & 5.09 & -18.60 & 4.00 & 5.0 & 6.20 &
+218.2 & ▇▁▁▁▁ \\
+\end{longtable}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# II. Preprocess data {-}{-}{-}{-}{-}{-}}
+\CommentTok{\# 1. include only valid values for ct\_result}
+\CommentTok{\# 2. select variables for the analysis}
+\CommentTok{\# 3. convert from numeric to factor}
+\NormalTok{data }\OtherTok{\textless{}{-}}\NormalTok{ covid\_testing }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(ct\_result }\SpecialCharTok{\textgreater{}} \DecValTok{0}\NormalTok{, result }\SpecialCharTok{\%in\%} \FunctionTok{c}\NormalTok{(}\StringTok{\textquotesingle{}positive\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}negative\textquotesingle{}}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%}
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{select}\NormalTok{(clinic\_name, result, ct\_result, gender, age, drive\_thru\_ind) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{drive\_thru\_ind\_factor =} \FunctionTok{as.factor}\NormalTok{(drive\_thru\_ind), }\AttributeTok{drive\_thru\_ind =} \ConstantTok{NULL}\NormalTok{)}
+
+\DocumentationTok{\#\# III. Construct summary data table PER GROUP {-}{-}{-}{-}{-}{-}}
+\CommentTok{\# Include also summaries for interactions, log transformations, and quadratic terms}
+
+\CommentTok{\# A. Standardize numeric variablesm {-}{-}{-}{-}{-}{-}}
+\NormalTok{data }\OtherTok{\textless{}{-}}\NormalTok{ data }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\FunctionTok{across}\NormalTok{(}\FunctionTok{where}\NormalTok{(is.numeric), }\SpecialCharTok{\textasciitilde{}} \FunctionTok{scale}\NormalTok{(.)[, }\DecValTok{1}\NormalTok{], }\AttributeTok{.names =} \StringTok{"std\_\{.col\}"}\NormalTok{))}
+
+\CommentTok{\# B. Log{-}transform numeric variables {-}{-}{-}{-}{-}{-}}
+\NormalTok{data }\OtherTok{\textless{}{-}}\NormalTok{ data }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\FunctionTok{across}\NormalTok{(}\FunctionTok{where}\NormalTok{(is.numeric) }\SpecialCharTok{\&}
+                  \SpecialCharTok{!}\FunctionTok{starts\_with}\NormalTok{(}\StringTok{"std\_"}\NormalTok{),}
+                \SpecialCharTok{\textasciitilde{}} \FunctionTok{log}\NormalTok{(.x), }
+                \AttributeTok{.names =} \StringTok{"log\_\{.col\}"}\NormalTok{))}
+
+\CommentTok{\# C. Compute quadratic terms for numeric variables {-}{-}{-}{-}{-}{-}}
+\NormalTok{data }\OtherTok{\textless{}{-}}\NormalTok{ data }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\FunctionTok{across}\NormalTok{(}\FunctionTok{where}\NormalTok{(is.numeric) }\SpecialCharTok{\&}
+                  \SpecialCharTok{!}\FunctionTok{starts\_with}\NormalTok{(}\StringTok{"std\_"}\NormalTok{) }\SpecialCharTok{\&}
+                  \SpecialCharTok{!}\FunctionTok{starts\_with}\NormalTok{(}\StringTok{"log\_"}\NormalTok{),}
+                \SpecialCharTok{\textasciitilde{}}\NormalTok{ (.x)}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{, }
+                \AttributeTok{.names =} \StringTok{"\{.col\}\_sq"}\NormalTok{))}
+
+\CommentTok{\# D. Compute interaction columns {-}{-}{-}{-}{-}{-}}
+\CommentTok{\# 1. Construct design matrix (as dataframe) from current dataset}
+\NormalTok{data\_design\_df }\OtherTok{\textless{}{-}} \FunctionTok{as.data.frame}\NormalTok{(}\FunctionTok{model.matrix}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{ ., data }\SpecialCharTok{\%\textgreater{}\%}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{select}\NormalTok{(}\SpecialCharTok{{-}}\FunctionTok{c}\NormalTok{(clinic\_name))))}
+\NormalTok{data\_design\_df}\SpecialCharTok{$}\NormalTok{clinic\_name }\OtherTok{\textless{}{-}}\NormalTok{ data}\SpecialCharTok{$}\NormalTok{clinic\_name}
+\CommentTok{\# 2. Break up data per group}
+\NormalTok{group\_data\_design\_df }\OtherTok{\textless{}{-}}\NormalTok{ data\_design\_df }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_split}\NormalTok{(clinic\_name) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{keep}\NormalTok{(}\SpecialCharTok{\textasciitilde{}} \FunctionTok{nrow}\NormalTok{(.x) }\SpecialCharTok{\textgreater{}} \DecValTok{1}\NormalTok{)}
+\CommentTok{\# 3. Extract unique group names}
+\NormalTok{unique\_group\_names }\OtherTok{\textless{}{-}} \FunctionTok{do.call}\NormalTok{(rbind, group\_data\_design\_df) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{pull}\NormalTok{(clinic\_name) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{unique}\NormalTok{()}
+\CommentTok{\# 4. Assign names to the list elements}
+\FunctionTok{names}\NormalTok{(group\_data\_design\_df) }\OtherTok{\textless{}{-}}\NormalTok{ unique\_group\_names}
+\CommentTok{\# 5. Create variable names for interaction terms}
+\NormalTok{var\_names\_for\_interaction }\OtherTok{\textless{}{-}} \FunctionTok{combn}\NormalTok{(}\FunctionTok{names}\NormalTok{(group\_data\_design\_df[[}\DecValTok{1}\NormalTok{]] }\SpecialCharTok{\%\textgreater{}\%}
+\NormalTok{                                           dplyr}\SpecialCharTok{::}\FunctionTok{select}\NormalTok{(}\SpecialCharTok{{-}}\FunctionTok{starts\_with}\NormalTok{(}\StringTok{\textquotesingle{}log\textquotesingle{}}\NormalTok{) }\SpecialCharTok{\&} \SpecialCharTok{{-}}\FunctionTok{ends\_with}\NormalTok{(}\StringTok{\textquotesingle{}\_sq\textquotesingle{}}\NormalTok{) }\SpecialCharTok{\&} \SpecialCharTok{{-}}\StringTok{\textquotesingle{}(Intercept)\textquotesingle{}} \SpecialCharTok{\&} \SpecialCharTok{{-}}\FunctionTok{starts\_with}\NormalTok{(}\StringTok{\textquotesingle{}clinic\textquotesingle{}}\NormalTok{))), }\DecValTok{2}\NormalTok{)}
+\NormalTok{var\_names\_of\_interaction }\OtherTok{\textless{}{-}} \FunctionTok{apply}\NormalTok{(var\_names\_for\_interaction, }\DecValTok{2}\NormalTok{, }
+                                  \ControlFlowTok{function}\NormalTok{(vars)\{}\FunctionTok{paste0}\NormalTok{(vars[}\DecValTok{1}\NormalTok{],}\StringTok{\textquotesingle{}X\textquotesingle{}}\NormalTok{,vars[}\DecValTok{2}\NormalTok{])\})}
+\CommentTok{\# 6. Include interaction columns in dataframe}
+\NormalTok{group\_data\_design\_df }\OtherTok{\textless{}{-}} \FunctionTok{lapply}\NormalTok{(group\_data\_design\_df,}
+                               \ControlFlowTok{function}\NormalTok{(grp)\{}
+\NormalTok{                                 interaction\_columns }\OtherTok{\textless{}{-}} \FunctionTok{do.call}\NormalTok{(cbind,}
+                                                                \FunctionTok{apply}\NormalTok{(var\_names\_for\_interaction, }\DecValTok{2}\NormalTok{, }\ControlFlowTok{function}\NormalTok{(var\_name) grp[,var\_name[}\DecValTok{1}\NormalTok{]]}\SpecialCharTok{*}\NormalTok{grp[,var\_name[}\DecValTok{2}\NormalTok{]]))}
+                                 \FunctionTok{names}\NormalTok{(interaction\_columns) }\OtherTok{\textless{}{-}}\NormalTok{ var\_names\_of\_interaction}
+                                 \FunctionTok{cbind}\NormalTok{(grp, interaction\_columns)}
+\NormalTok{                               \})}
+
+\CommentTok{\# E. Compute sufficient statistics per hospital {-}{-}{-}{-}{-}{-}}
+\NormalTok{summary\_stats }\OtherTok{\textless{}{-}} \FunctionTok{lapply}\NormalTok{(group\_data\_design\_df,}
+                        \ControlFlowTok{function}\NormalTok{(grp)\{}
+                          \FunctionTok{data.frame}\NormalTok{(}
+                            \AttributeTok{variable =} \FunctionTok{names}\NormalTok{(grp[, }\FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{)] }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{                                               dplyr}\SpecialCharTok{::}\FunctionTok{select}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{(}\FunctionTok{starts\_with}\NormalTok{(}\StringTok{\textquotesingle{}clinic\textquotesingle{}}\NormalTok{)))),}
+                            \AttributeTok{n =} \FunctionTok{rep}\NormalTok{(}\FunctionTok{nrow}\NormalTok{(grp), }\FunctionTok{length}\NormalTok{(}\FunctionTok{names}\NormalTok{(grp[, }\FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{)] }\SpecialCharTok{\%\textgreater{}\%}
+\NormalTok{                                                                   dplyr}\SpecialCharTok{::}\FunctionTok{select}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{(}\FunctionTok{starts\_with}\NormalTok{(}\StringTok{\textquotesingle{}clinic\textquotesingle{}}\NormalTok{)))))),}
+                            \AttributeTok{mean =} \FunctionTok{apply}\NormalTok{(grp[, }\FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{)] }\SpecialCharTok{\%\textgreater{}\%}
+\NormalTok{                                           dplyr}\SpecialCharTok{::}\FunctionTok{select}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{(}\FunctionTok{starts\_with}\NormalTok{(}\StringTok{\textquotesingle{}clinic\textquotesingle{}}\NormalTok{))),}
+                                         \DecValTok{2}\NormalTok{, mean, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),}
+                            \AttributeTok{variance =} \FunctionTok{ifelse}\NormalTok{(}\FunctionTok{is.na}\NormalTok{(}\FunctionTok{apply}\NormalTok{(grp[, }\FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{)] }\SpecialCharTok{\%\textgreater{}\%}
+\NormalTok{                                               dplyr}\SpecialCharTok{::}\FunctionTok{select}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{(}\FunctionTok{starts\_with}\NormalTok{(}\StringTok{\textquotesingle{}clinic\textquotesingle{}}\NormalTok{))),}
+                                             \DecValTok{2}\NormalTok{, var)), }\DecValTok{0}\NormalTok{, }\FunctionTok{apply}\NormalTok{(grp[, }\FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{)] }\SpecialCharTok{\%\textgreater{}\%}
+\NormalTok{                                                                  dplyr}\SpecialCharTok{::}\FunctionTok{select}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{(}\FunctionTok{starts\_with}\NormalTok{(}\StringTok{\textquotesingle{}clinic\textquotesingle{}}\NormalTok{))),}
+                                                                \DecValTok{2}\NormalTok{, var)),}
+                            \AttributeTok{row.names =} \ConstantTok{NULL}\NormalTok{)}
+\NormalTok{                          \})}
+\NormalTok{var\_cov\_mat }\OtherTok{\textless{}{-}} \FunctionTok{lapply}\NormalTok{(group\_data\_design\_df,}
+                      \ControlFlowTok{function}\NormalTok{(grp) }\FunctionTok{cov}\NormalTok{(grp[, }\FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{)] }\SpecialCharTok{\%\textgreater{}\%}
+\NormalTok{                                          dplyr}\SpecialCharTok{::}\FunctionTok{select}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{(}\FunctionTok{starts\_with}\NormalTok{(}\StringTok{\textquotesingle{}clinic\textquotesingle{}}\NormalTok{)))))}
+\NormalTok{var\_cov\_mat }\OtherTok{\textless{}{-}} \FunctionTok{lapply}\NormalTok{(var\_cov\_mat, }\ControlFlowTok{function}\NormalTok{(grp) }\FunctionTok{apply}\NormalTok{(grp, }\DecValTok{2}\NormalTok{, }\ControlFlowTok{function}\NormalTok{(column) }\FunctionTok{ifelse}\NormalTok{(}\FunctionTok{is.na}\NormalTok{(column),}\DecValTok{0}\NormalTok{,column)))}
+
+\CommentTok{\# Merge all dataframes into one}
+\NormalTok{summary\_stats\_one }\OtherTok{\textless{}{-}} \FunctionTok{do.call}\NormalTok{(rbind, summary\_stats)}
+\FunctionTok{row.names}\NormalTok{(summary\_stats\_one) }\OtherTok{\textless{}{-}} \ConstantTok{NULL}
+\NormalTok{summary\_stats\_one}\SpecialCharTok{$}\NormalTok{clinic\_name }\OtherTok{\textless{}{-}} \FunctionTok{rep}\NormalTok{(}\FunctionTok{names}\NormalTok{(summary\_stats), }
+                                     \AttributeTok{each =} \FunctionTok{nrow}\NormalTok{(summary\_stats[[}\DecValTok{1}\NormalTok{]]))}
+\NormalTok{var\_cov\_mat\_one }\OtherTok{\textless{}{-}} \FunctionTok{as.data.frame}\NormalTok{(}\FunctionTok{do.call}\NormalTok{(rbind, var\_cov\_mat))}
+\NormalTok{var\_cov\_mat\_one}\SpecialCharTok{$}\NormalTok{clinic\_name }\OtherTok{\textless{}{-}} \FunctionTok{rep}\NormalTok{(}\FunctionTok{names}\NormalTok{(var\_cov\_mat), }
+                                   \AttributeTok{each =} \FunctionTok{nrow}\NormalTok{(var\_cov\_mat[[}\DecValTok{1}\NormalTok{]]))}
+\FunctionTok{write.csv}\NormalTok{(summary\_stats\_one, }\AttributeTok{file =} \StringTok{"summary\_stats\_chop.csv"}\NormalTok{)}
+\FunctionTok{write.csv}\NormalTok{(var\_cov\_mat\_one, }\AttributeTok{file =} \StringTok{"var\_cov\_mat\_chop.csv"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# I. Load packages / functions / [summary] data {-}{-}{-}{-}{-}{-}}
+\CommentTok{\#install.packages(\textquotesingle{}lme4\textquotesingle{})}
+\FunctionTok{library}\NormalTok{(lme4)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Loading required package: Matrix
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{source}\NormalTok{(}\StringTok{\textquotesingle{}pseudo\_data\_gen\_fn.R\textquotesingle{}}\NormalTok{) }\CommentTok{\#modified mvrnorm}
+\FunctionTok{source}\NormalTok{(}\StringTok{\textquotesingle{}pseudo\_data\_ls\_fn.R\textquotesingle{}}\NormalTok{) }
+\CommentTok{\#other options are source(\textquotesingle{}pseudo\_data\_gen\_mvrnorm\_option\_fn.R\textquotesingle{}) or source(\textquotesingle{}pseudo\_data\_gen\_chol\_option\_fn.R\textquotesingle{})}
+
+\NormalTok{id\_summary\_stats }\OtherTok{\textless{}{-}} \StringTok{"1dw6y5CN1d1Kuh5PMyZ7Nh6\_5kbyrpN4L"}
+\NormalTok{summary\_stats\_one }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\FunctionTok{sprintf}\NormalTok{(}\StringTok{"https://docs.google.com/uc?id=\%s\&export=download"}\NormalTok{, id\_summary\_stats))}
+\NormalTok{summary\_stats }\OtherTok{\textless{}{-}}\NormalTok{ summary\_stats\_one }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{select}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{split}\NormalTok{(}\AttributeTok{f =} \FunctionTok{as.factor}\NormalTok{(.}\SpecialCharTok{$}\NormalTok{clinic\_name)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{lapply}\NormalTok{(}\ControlFlowTok{function}\NormalTok{(df)\{}
+\NormalTok{    df[}\SpecialCharTok{{-}}\FunctionTok{ncol}\NormalTok{(df)]}
+\NormalTok{  \})}
+
+\NormalTok{id\_var\_cov\_mat }\OtherTok{\textless{}{-}} \StringTok{"1dwuaHNbUAtnzV8FtBiH7H\_isRqkHjT1w"}
+\NormalTok{var\_cov\_mat\_one }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\FunctionTok{sprintf}\NormalTok{(}\StringTok{"https://docs.google.com/uc?id=\%s\&export=download"}\NormalTok{, id\_var\_cov\_mat))}
+\NormalTok{var\_cov\_mat }\OtherTok{\textless{}{-}}\NormalTok{ var\_cov\_mat\_one }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{select}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{split}\NormalTok{(}\AttributeTok{f =} \FunctionTok{as.factor}\NormalTok{(.}\SpecialCharTok{$}\NormalTok{clinic\_name)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{lapply}\NormalTok{(}\ControlFlowTok{function}\NormalTok{(df) \{}
+      \FunctionTok{rownames}\NormalTok{(df) }\OtherTok{\textless{}{-}} \FunctionTok{colnames}\NormalTok{(df)[}\SpecialCharTok{{-}}\FunctionTok{ncol}\NormalTok{(df)]}
+    \FunctionTok{return}\NormalTok{(}\FunctionTok{as.matrix}\NormalTok{(df[}\SpecialCharTok{{-}}\FunctionTok{ncol}\NormalTok{(df)]))}
+\NormalTok{  \})}
+
+\CommentTok{\# Preview of summary statistics from 1 data provider}
+\NormalTok{vars }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{\textquotesingle{}log\_ct\_result\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}gendermale\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}age\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}drive\_thru\_ind\_factor1\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}gendermaleXage\textquotesingle{}}\NormalTok{)}
+\NormalTok{summary\_stats[[}\DecValTok{26}\NormalTok{]][summary\_stats[[}\DecValTok{26}\NormalTok{]][,}\StringTok{\textquotesingle{}variable\textquotesingle{}}\NormalTok{] }\SpecialCharTok{\%in\%}\NormalTok{ vars, ]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                   variable   n        mean     variance
+## 803             gendermale 208 0.528846154 2.503716e-01
+## 804                    age 208 1.372596154 1.050606e+01
+## 805 drive_thru_ind_factor1 208 0.004807692 4.807692e-03
+## 808          log_ct_result 208 3.803002662 5.554545e-04
+## 823         gendermaleXage 208 0.778846154 7.085444e+00
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{round}\NormalTok{(var\_cov\_mat[[}\DecValTok{26}\NormalTok{]][vars,vars], }\DecValTok{3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                        log_ct_result gendermale    age drive_thru_ind_factor1
+## log_ct_result                  0.001      0.001  0.001                  0.000
+## gendermale                     0.001      0.250  0.053                  0.002
+## age                            0.001      0.053 10.506                  0.003
+## drive_thru_ind_factor1         0.000      0.002  0.003                  0.005
+## gendermaleXage                -0.001      0.369  6.621                  0.006
+##                        gendermaleXage
+## log_ct_result                  -0.001
+## gendermale                      0.369
+## age                             6.621
+## drive_thru_ind_factor1          0.006
+## gendermaleXage                  7.085
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# II. Generate pseudo{-}data {-}{-}{-}{-}{-}{-}}
+\CommentTok{\# A. Provide model specification {-}{-}{-}{-}{-}{-}}
+\NormalTok{formula }\OtherTok{\textless{}{-}}\NormalTok{ log\_ct\_result }\SpecialCharTok{\textasciitilde{}}\NormalTok{ gendermale }\SpecialCharTok{+}\NormalTok{ std\_age }\SpecialCharTok{+}\NormalTok{ drive\_thru\_ind\_factor1 }\SpecialCharTok{+}\NormalTok{ gendermaleXstd\_age }
+
+
+
+
+\CommentTok{\# B. Generate pseudo{-}data {-}{-}{-}{-}{-}{-}}
+\CommentTok{\# (initial random numbers come from a std uniform distribution)}
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{121314}\NormalTok{)}
+\NormalTok{pseudo\_data }\OtherTok{\textless{}{-}} \FunctionTok{lapply}\NormalTok{(}\FunctionTok{names}\NormalTok{(summary\_stats), pseudo\_data\_ls\_fn)}
+\FunctionTok{names}\NormalTok{(pseudo\_data) }\OtherTok{\textless{}{-}} \FunctionTok{names}\NormalTok{(summary\_stats)}
+
+\CommentTok{\# C. Combine [list] into one df {-}{-}{-}{-}{-}{-}}
+\NormalTok{pooled\_pseudo\_data }\OtherTok{\textless{}{-}} \FunctionTok{do.call}\NormalTok{(rbind, pseudo\_data)}
+
+\DocumentationTok{\#\# III. Estimate LMM using pseudo{-}data}
+\CommentTok{\# A. With random{-}intercept only {-}{-}{-}{-}{-}{-}}
+\NormalTok{lmm\_pseudo }\OtherTok{\textless{}{-}} \FunctionTok{lmer}\NormalTok{(log\_ct\_result }\SpecialCharTok{\textasciitilde{}}\NormalTok{ gendermale }\SpecialCharTok{+}\NormalTok{ std\_age }\SpecialCharTok{+}\NormalTok{ drive\_thru\_ind\_factor1 }\SpecialCharTok{+}\NormalTok{ gendermaleXstd\_age }\SpecialCharTok{+}\NormalTok{ (}\DecValTok{1}\SpecialCharTok{|}\NormalTok{clinic\_name), }\AttributeTok{data =}\NormalTok{ pooled\_pseudo\_data)}
+\FunctionTok{summary}\NormalTok{(lmm\_pseudo)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Linear mixed model fit by REML ['lmerMod']
+## Formula: log_ct_result ~ gendermale + std_age + drive_thru_ind_factor1 +  
+##     gendermaleXstd_age + (1 | clinic_name)
+##    Data: pooled_pseudo_data
+## 
+## REML criterion at convergence: -20473
+## 
+## Scaled residuals: 
+##     Min      1Q  Median      3Q     Max 
+## -4.5919 -0.5799  0.0249  0.5762  3.7464 
+## 
+## Random effects:
+##  Groups      Name        Variance  Std.Dev.
+##  clinic_name (Intercept) 0.0004689 0.02165 
+##  Residual                0.0149360 0.12221 
+## Number of obs: 15068, groups:  clinic_name, 70
+## 
+## Fixed effects:
+##                         Estimate Std. Error t value
+## (Intercept)             3.787066   0.003947 959.587
+## gendermale              0.002088   0.001995   1.047
+## std_age                -0.004576   0.001545  -2.961
+## drive_thru_ind_factor1 -0.004276   0.005802  -0.737
+## gendermaleXstd_age     -0.006105   0.001997  -3.058
+## 
+## Correlation of Fixed Effects:
+##             (Intr) gndrml std_ag dr___1
+## gendermale  -0.255                     
+## std_age      0.013 -0.005              
+## drv_thr_n_1 -0.145  0.013  0.020       
+## gndrmlXstd_  0.003  0.000 -0.658 -0.003
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Compare with LMM using actual data}
+\NormalTok{pooled\_actual\_data }\OtherTok{\textless{}{-}}\NormalTok{ data }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{filter}\NormalTok{(clinic\_name }\SpecialCharTok{\%in\%} \FunctionTok{names}\NormalTok{(group\_data\_design\_df))}
+\NormalTok{lmm\_actual }\OtherTok{\textless{}{-}} \FunctionTok{lmer}\NormalTok{(log\_ct\_result }\SpecialCharTok{\textasciitilde{}}\NormalTok{ gender }\SpecialCharTok{*}\NormalTok{ std\_age }\SpecialCharTok{+}\NormalTok{ drive\_thru\_ind\_factor }\SpecialCharTok{+}\NormalTok{ (}\DecValTok{1}\SpecialCharTok{|}\NormalTok{clinic\_name), }\AttributeTok{data =}\NormalTok{ pooled\_actual\_data)}
+\FunctionTok{summary}\NormalTok{(lmm\_actual)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Linear mixed model fit by REML ['lmerMod']
+## Formula: log_ct_result ~ gender * std_age + drive_thru_ind_factor + (1 |  
+##     clinic_name)
+##    Data: pooled_actual_data
+## 
+## REML criterion at convergence: -20473
+## 
+## Scaled residuals: 
+##     Min      1Q  Median      3Q     Max 
+## -9.3287  0.1482  0.2174  0.2538  1.1855 
+## 
+## Random effects:
+##  Groups      Name        Variance  Std.Dev.
+##  clinic_name (Intercept) 0.0004689 0.02165 
+##  Residual                0.0149360 0.12221 
+## Number of obs: 15068, groups:  clinic_name, 70
+## 
+## Fixed effects:
+##                         Estimate Std. Error t value
+## (Intercept)             3.787066   0.003947 959.587
+## gendermale              0.002088   0.001995   1.047
+## std_age                -0.004576   0.001545  -2.961
+## drive_thru_ind_factor1 -0.004276   0.005802  -0.737
+## gendermale:std_age     -0.006105   0.001997  -3.058
+## 
+## Correlation of Fixed Effects:
+##             (Intr) gndrml std_ag dr___1
+## gendermale  -0.255                     
+## std_age      0.013 -0.005              
+## drv_thr_n_1 -0.145  0.013  0.020       
+## gndrml:std_  0.003  0.000 -0.658 -0.003
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Compute AIC and confidence intervals (random intercept only)}
+\FunctionTok{AIC}\NormalTok{(lmm\_pseudo)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] -20459.04
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{AIC}\NormalTok{(lmm\_actual)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] -20459.04
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{BIC}\NormalTok{(lmm\_pseudo)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] -20405.7
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{BIC}\NormalTok{(lmm\_actual)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] -20405.7
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{confint}\NormalTok{(lmm\_pseudo)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Computing profile confidence intervals ...
+\end{verbatim}
+
+\begin{verbatim}
+##                               2.5 %       97.5 %
+## .sig01                  0.016022295  0.028193030
+## .sigma                  0.120828350  0.123591823
+## (Intercept)             3.779332754  3.794900771
+## gendermale             -0.001822568  0.005996308
+## std_age                -0.007601562 -0.001547158
+## drive_thru_ind_factor1 -0.015632588  0.007088819
+## gendermaleXstd_age     -0.010024750 -0.002196225
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{confint}\NormalTok{(lmm\_actual)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Computing profile confidence intervals ...
+\end{verbatim}
+
+\begin{verbatim}
+##                               2.5 %       97.5 %
+## .sig01                  0.016022296  0.028193029
+## .sigma                  0.120828350  0.123591823
+## (Intercept)             3.779332754  3.794900771
+## gendermale             -0.001822568  0.005996308
+## std_age                -0.007601562 -0.001547158
+## drive_thru_ind_factor1 -0.015632588  0.007088819
+## gendermale:std_age     -0.010024750 -0.002196225
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# B. With random intercept+slope) {-}{-}{-}{-}{-}{-}}
+\NormalTok{lmm\_pseudo }\OtherTok{\textless{}{-}} \FunctionTok{lmer}\NormalTok{(log\_ct\_result }\SpecialCharTok{\textasciitilde{}}\NormalTok{ gendermale }\SpecialCharTok{+}\NormalTok{ std\_age }\SpecialCharTok{+}\NormalTok{ drive\_thru\_ind\_factor1 }\SpecialCharTok{+}\NormalTok{ gendermaleXstd\_age }\SpecialCharTok{+}\NormalTok{ (}\DecValTok{1}\SpecialCharTok{+}\NormalTok{std\_age}\SpecialCharTok{|}\NormalTok{clinic\_name), }\AttributeTok{data =}\NormalTok{ pooled\_pseudo\_data)}
+\FunctionTok{summary}\NormalTok{(lmm\_pseudo)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Linear mixed model fit by REML ['lmerMod']
+## Formula: log_ct_result ~ gendermale + std_age + drive_thru_ind_factor1 +  
+##     gendermaleXstd_age + (1 + std_age | clinic_name)
+##    Data: pooled_pseudo_data
+## 
+## REML criterion at convergence: -20513.2
+## 
+## Scaled residuals: 
+##     Min      1Q  Median      3Q     Max 
+## -4.7364 -0.5806  0.0240  0.5779  3.7682 
+## 
+## Random effects:
+##  Groups      Name        Variance  Std.Dev. Corr 
+##  clinic_name (Intercept) 0.0006220 0.02494       
+##              std_age     0.0001643 0.01282  -0.10
+##  Residual                0.0148649 0.12192       
+## Number of obs: 15068, groups:  clinic_name, 70
+## 
+## Fixed effects:
+##                          Estimate Std. Error t value
+## (Intercept)             3.7851418  0.0044954 841.996
+## gendermale              0.0020821  0.0019919   1.045
+## std_age                -0.0005126  0.0036856  -0.139
+## drive_thru_ind_factor1 -0.0037530  0.0058529  -0.641
+## gendermaleXstd_age     -0.0052269  0.0020098  -2.601
+## 
+## Correlation of Fixed Effects:
+##             (Intr) gndrml std_ag dr___1
+## gendermale  -0.225                     
+## std_age      0.115 -0.007              
+## drv_thr_n_1 -0.126  0.013  0.021       
+## gndrmlXstd_ -0.003  0.003 -0.284 -0.002
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Compare with LMM using actual data (random intercept+slope)}
+\NormalTok{lmm\_actual }\OtherTok{\textless{}{-}} \FunctionTok{lmer}\NormalTok{(log\_ct\_result }\SpecialCharTok{\textasciitilde{}}\NormalTok{ gender }\SpecialCharTok{*}\NormalTok{ std\_age }\SpecialCharTok{+}\NormalTok{ drive\_thru\_ind\_factor }\SpecialCharTok{+}\NormalTok{ (}\DecValTok{1}\SpecialCharTok{+}\NormalTok{std\_age}\SpecialCharTok{|}\NormalTok{clinic\_name), }\AttributeTok{data =}\NormalTok{ pooled\_actual\_data)}
+\FunctionTok{summary}\NormalTok{(lmm\_actual)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Linear mixed model fit by REML ['lmerMod']
+## Formula: log_ct_result ~ gender * std_age + drive_thru_ind_factor + (1 +  
+##     std_age | clinic_name)
+##    Data: pooled_actual_data
+## 
+## REML criterion at convergence: -20513.2
+## 
+## Scaled residuals: 
+##     Min      1Q  Median      3Q     Max 
+## -9.3604  0.1229  0.2030  0.2560  1.8698 
+## 
+## Random effects:
+##  Groups      Name        Variance  Std.Dev. Corr 
+##  clinic_name (Intercept) 0.0006220 0.02494       
+##              std_age     0.0001643 0.01282  -0.10
+##  Residual                0.0148649 0.12192       
+## Number of obs: 15068, groups:  clinic_name, 70
+## 
+## Fixed effects:
+##                          Estimate Std. Error t value
+## (Intercept)             3.7851418  0.0044954 841.996
+## gendermale              0.0020821  0.0019919   1.045
+## std_age                -0.0005126  0.0036856  -0.139
+## drive_thru_ind_factor1 -0.0037530  0.0058529  -0.641
+## gendermale:std_age     -0.0052269  0.0020098  -2.601
+## 
+## Correlation of Fixed Effects:
+##             (Intr) gndrml std_ag dr___1
+## gendermale  -0.225                     
+## std_age      0.115 -0.007              
+## drv_thr_n_1 -0.126  0.013  0.021       
+## gndrml:std_ -0.003  0.003 -0.284 -0.002
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Compute AIC and confidence intervals (random intercept+slope)}
+\FunctionTok{AIC}\NormalTok{(lmm\_pseudo)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] -20495.15
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{AIC}\NormalTok{(lmm\_actual)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] -20495.15
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{BIC}\NormalTok{(lmm\_pseudo)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] -20426.57
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{BIC}\NormalTok{(lmm\_actual)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] -20426.57
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{confint}\NormalTok{(lmm\_pseudo)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Computing profile confidence intervals ...
+\end{verbatim}
+
+\begin{verbatim}
+##                               2.5 %       97.5 %
+## .sig01                  0.018517717  0.032316506
+## .sig02                 -0.579652278  0.391660240
+## .sig03                  0.007933868  0.018998638
+## .sigma                  0.120542665  0.123301809
+## (Intercept)             3.776227341  3.794209958
+## gendermale             -0.001824739  0.005984991
+## std_age                -0.008058855  0.007360131
+## drive_thru_ind_factor1 -0.015230494  0.007718764
+## gendermaleXstd_age     -0.009198163 -0.001297890
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{confint}\NormalTok{(lmm\_actual)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Computing profile confidence intervals ...
+\end{verbatim}
+
+\begin{verbatim}
+##                               2.5 %       97.5 %
+## .sig01                  0.018517685  0.032316502
+## .sig02                 -0.579664309  0.391678681
+## .sig03                  0.007928129  0.018998639
+## .sigma                  0.120542665  0.123301809
+## (Intercept)             3.776227341  3.794209958
+## gendermale             -0.001824739  0.005984991
+## std_age                -0.008058855  0.007360143
+## drive_thru_ind_factor1 -0.015230494  0.007718764
+## gendermale:std_age     -0.009198163 -0.001297891
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Perform posthoc procedures via lmerTest}
+\CommentTok{\# lmm\_pseudo \textless{}{-} lmerTest::lmer(log\_ct\_result \textasciitilde{} gendermale + age + drive\_thru\_ind\_factor1 + gendermaleXage + (1|clinic\_name), data = pooled\_pseudo\_data)}
+\CommentTok{\# summary(lmm\_pseudo)}
+\CommentTok{\# lmm\_actual \textless{}{-} lmerTest::lmer(log\_ct\_result \textasciitilde{} gender * std\_age + drive\_thru\_ind\_factor + (1|clinic\_name), data = pooled\_actual\_data)}
+\CommentTok{\# summary(lmm\_actual)}
+\CommentTok{\# }
+\CommentTok{\# anova(lmm\_pseudo, type = 2, ddf = "Kenward{-}Roger")}
+\CommentTok{\# anova(lmm\_actual, type = 2, ddf = "Kenward{-}Roger")}
+\end{Highlighting}
+\end{Shaded}
+
+
+\end{document}

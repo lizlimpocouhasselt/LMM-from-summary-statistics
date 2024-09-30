@@ -110,8 +110,17 @@ var_cov_mat <- lapply(group_data_design_df,
                       function(grp) cov(grp[, c(-1)] %>%
                                           dplyr::select(-(starts_with('clinic')))))
 var_cov_mat <- lapply(var_cov_mat, function(grp) apply(grp, 2, function(column) ifelse(is.na(column),0,column)))
-#saveRDS(summary_stats, file = "summary_stats_chop.R")
-#saveRDS(var_cov_mat, file = "var_cov_mat_chop.R")
+
+# Merge all dataframes into one
+summary_stats_one <- do.call(rbind, summary_stats)
+row.names(summary_stats_one) <- NULL
+summary_stats_one$clinic_name <- rep(names(summary_stats), 
+                                     each = nrow(summary_stats[[1]]))
+var_cov_mat_one <- as.data.frame(do.call(rbind, var_cov_mat))
+var_cov_mat_one$clinic_name <- rep(names(var_cov_mat), 
+                                   each = nrow(var_cov_mat[[1]]))
+write.csv(summary_stats_one, file = "summary_stats_chop.csv")
+write.csv(var_cov_mat_one, file = "var_cov_mat_chop.csv")
 
 
 
@@ -122,8 +131,26 @@ library(lme4)
 source('pseudo_data_gen_fn.R') #modified mvrnorm
 source('pseudo_data_ls_fn.R') 
 #other options are source('pseudo_data_gen_mvrnorm_option_fn.R') or source('pseudo_data_gen_chol_option_fn.R')
-#summary_stats <- readRDS("summary_stats_chop.R")
-#var_cov_mat <- readRDS("var_cov_mat_chop.R")
+
+id_summary_stats <- "1dw6y5CN1d1Kuh5PMyZ7Nh6_5kbyrpN4L"
+summary_stats_one <- read.csv(sprintf("https://docs.google.com/uc?id=%s&export=download", id_summary_stats))
+summary_stats <- summary_stats_one %>% 
+  dplyr::select(-1) %>% 
+  split(f = as.factor(.$clinic_name)) %>%
+  lapply(function(df){
+    df[-ncol(df)]
+  })
+
+id_var_cov_mat <- "1dwuaHNbUAtnzV8FtBiH7H_isRqkHjT1w"
+var_cov_mat_one <- read.csv(sprintf("https://docs.google.com/uc?id=%s&export=download", id_var_cov_mat))
+var_cov_mat <- var_cov_mat_one %>% 
+  dplyr::select(-1) %>%
+  split(f = as.factor(.$clinic_name)) %>%
+  lapply(function(df) {
+      rownames(df) <- colnames(df)[-ncol(df)]
+    return(as.matrix(df[-ncol(df)]))
+  })
+
 # Preview of summary statistics from 1 data provider
 vars <- c('log_ct_result', 'gendermale', 'age', 'drive_thru_ind_factor1', 'gendermaleXage')
 summary_stats[[26]][summary_stats[[26]][,'variable'] %in% vars, ]
