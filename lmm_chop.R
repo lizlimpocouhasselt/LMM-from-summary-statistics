@@ -110,8 +110,8 @@ var_cov_mat <- lapply(group_data_design_df,
                       function(grp) cov(grp[, c(-1)] %>%
                                           dplyr::select(-(starts_with('clinic')))))
 var_cov_mat <- lapply(var_cov_mat, function(grp) apply(grp, 2, function(column) ifelse(is.na(column),0,column)))
-saveRDS(summary_stats, file = "summary_stats_chop.R")
-saveRDS(var_cov_mat, file = "var_cov_mat_chop.R")
+#saveRDS(summary_stats, file = "summary_stats_chop.R")
+#saveRDS(var_cov_mat, file = "var_cov_mat_chop.R")
 
 
 
@@ -122,8 +122,8 @@ library(lme4)
 source('pseudo_data_gen_fn.R') #modified mvrnorm
 source('pseudo_data_ls_fn.R') 
 #other options are source('pseudo_data_gen_mvrnorm_option_fn.R') or source('pseudo_data_gen_chol_option_fn.R')
-summary_stats <- readRDS("summary_stats_chop.R")
-var_cov_mat <- readRDS("var_cov_mat_chop.R")
+#summary_stats <- readRDS("summary_stats_chop.R")
+#var_cov_mat <- readRDS("var_cov_mat_chop.R")
 # Preview of summary statistics from 1 data provider
 vars <- c('log_ct_result', 'gendermale', 'age', 'drive_thru_ind_factor1', 'gendermaleXage')
 summary_stats[[26]][summary_stats[[26]][,'variable'] %in% vars, ]
