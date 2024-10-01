@@ -16,9 +16,10 @@ To generate pseudo-data, we utilize the following functions:
 source('pseudo_data_gen_fn.R') #modified mvrnorm
 source('pseudo_data_ls_fn.R') 
 ``` 
-Once pseudo-data are generated, we will use the following package in R to estimate an LMM 
+We also need the following R packages: 
 ```r
 library(lme4)
+library(dplyr)
 ```
 For this demo, we used the publicly available data from the Children's Hospital of Pennsylvania (CHOP) which can be accessed from the R package [medicaldata](https://cran.r-project.org/web/packages/medicaldata/medicaldata.pdf). It contains deidentified patient information and COVID-19 test results from 88 clinics, although we only utilized 70 clinics for this demo after filtering out incomplete observations, observations with invalid values, and clinics with only 1 patient record. From these, we computed summary statistics such as the mean vector, covariance matrix, and sample size per clinic (see DATA PROVIDER TASK portion of lmm_chop.R). To mimic a real-world scenario in this demo, we assume that the data analyst has received only these summary statistics: 
 ```r
@@ -74,7 +75,8 @@ lmm_pseudo <- lmer(log_ct_result ~ gendermale + std_age + drive_thru_ind_factor1
 summary(lmm_pseudo)
 
 # Compare with LMM using actual data
-pooled_actual_data <- data %>% filter(clinic_name %in% names(group_data_design_df))
+id_data <- "1eSLj-vAwAOqlM1PV8WSdYl-fNcouWdme"
+pooled_actual_data <- read.csv(sprintf("https://docs.google.com/uc?id=%s&export=download", id_data))
 lmm_actual <- lmer(log_ct_result ~ gender * std_age + drive_thru_ind_factor + (1|clinic_name), data = pooled_actual_data)
 summary(lmm_actual)
 
