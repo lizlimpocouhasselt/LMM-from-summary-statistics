@@ -119,8 +119,12 @@ summary_stats_one$clinic_name <- rep(names(summary_stats),
 var_cov_mat_one <- as.data.frame(do.call(rbind, var_cov_mat))
 var_cov_mat_one$clinic_name <- rep(names(var_cov_mat), 
                                    each = nrow(var_cov_mat[[1]]))
+
+# Save summary statistics and preprocessed data
+data <- data %>% filter(clinic_name %in% names(group_data_design_df))
 write.csv(summary_stats_one, file = "summary_stats_chop.csv")
 write.csv(var_cov_mat_one, file = "var_cov_mat_chop.csv")
+write.csv(data, file = "actual_data_preprocessed_chop.csv")
 
 
 
@@ -178,7 +182,8 @@ lmm_pseudo <- lmer(log_ct_result ~ gendermale + std_age + drive_thru_ind_factor1
 summary(lmm_pseudo)
 
 # Compare with LMM using actual data
-pooled_actual_data <- data %>% filter(clinic_name %in% names(group_data_design_df))
+id_data <- "1eSLj-vAwAOqlM1PV8WSdYl-fNcouWdme"
+pooled_actual_data <- read.csv(sprintf("https://docs.google.com/uc?id=%s&export=download", id_data))
 lmm_actual <- lmer(log_ct_result ~ gender * std_age + drive_thru_ind_factor + (1|clinic_name), data = pooled_actual_data)
 summary(lmm_actual)
 
