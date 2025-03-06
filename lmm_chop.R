@@ -16,10 +16,11 @@ rm(list=ls(all=TRUE))
 ### ------ DATA PROVIDER TASK ------
 
 # Install packages
-#install.packages('medicaldata')
-#install.packages('skimr')
-#install.packages('purrr')
-#install.packages('dplyr')
+# install.packages('medicaldata')
+# install.packages('skimr')
+# install.packages('purrr')
+# install.packages('dplyr')
+# install.packages('lme4')
 
 ## I. Load packages and data ------
 library(medicaldata)
